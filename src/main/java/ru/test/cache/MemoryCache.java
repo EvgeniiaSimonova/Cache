@@ -2,11 +2,7 @@ package ru.test.cache;
 
 import ru.test.strategy.DisplacementStrategy;
 
-import java.util.Map;
-
 public class MemoryCache<K, V> extends OneLevelCache<K, V> {
-
-    private Map<K, CacheElement<V>> elements;
 
     public MemoryCache(int maxCacheElementCount, DisplacementStrategy<K, V> strategy) {
         super(maxCacheElementCount, strategy);

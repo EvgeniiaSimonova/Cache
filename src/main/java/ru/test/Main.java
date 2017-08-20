@@ -30,12 +30,6 @@ public class Main {
         System.out.print("Base directory for the second cache level is ");
         String baseDirectoryPath = scanner.next();
 
-        System.out.println(sizeLevel1);
-        System.out.println(sizeLevel2);
-        System.out.println(strategyName);
-        System.out.println(baseDirectoryPath);
-
-
         try {
             Repository<String, String> repository = getRepository();
             Cache<String, String> cache = getCache(sizeLevel1, sizeLevel2, strategyName, baseDirectoryPath);
