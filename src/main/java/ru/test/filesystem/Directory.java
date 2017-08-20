@@ -26,6 +26,16 @@ public class Directory<K, V extends Serializable> {
         file.delete();
     }
 
+    public void clear() {
+        File[] files = baseDirectory.listFiles();
+        if (files != null) {
+            for (File file: files) {
+                file.delete();
+            }
+        }
+        baseDirectory.delete();
+    }
+
     private File createBaseDirectory(String baseDirectoryPath) {
         File baseDirectory = new File(baseDirectoryPath);
         if (!baseDirectory.exists()) {

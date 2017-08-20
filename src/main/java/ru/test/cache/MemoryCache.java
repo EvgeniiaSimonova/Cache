@@ -32,4 +32,9 @@ public class MemoryCache<K, V> extends OneLevelCache<K, V> {
     public void remove(K key) {
         elements.remove(key);
     }
+
+    @Override
+    public void clear() {
+        elements.clear();
+    }
 }

@@ -40,6 +40,7 @@ public class Main {
                 Thread.sleep(1);
             }
 
+            storage.clear();
         } catch (InputParameterException e) {
             System.out.println(e.getMessage());
         }

@@ -22,6 +22,10 @@ public class Storage<K, V> {
         return value;
     }
 
+    public void clear() {
+        cache.clear();
+    }
+
     // may be it is better
     /*public V get2(K key) {
         V value;

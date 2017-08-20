@@ -41,4 +41,10 @@ public class FilesystemCache<K, V extends Serializable> extends OneLevelCache<K,
         elements.remove(key);
         directory.deleteFile(key);
     }
+
+    @Override
+    public void clear() {
+        elements.clear();
+        directory.clear();
+    }
 }

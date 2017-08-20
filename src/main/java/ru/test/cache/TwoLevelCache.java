@@ -45,6 +45,12 @@ public class TwoLevelCache<K, V extends Serializable> implements Cache<K, V> {
     }
 
     @Override
+    public void clear() {
+        level1.clear();
+        level2.clear();
+    }
+
+    @Override
     public boolean contains(K key) {
         return level1.contains(key) || level2.contains(key);
     }
