@@ -4,17 +4,13 @@ import ru.test.filesystem.Directory;
 import ru.test.strategy.DisplacementStrategy;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FileSystemCache<K, V extends Serializable> extends OneLevelCache<K, V> {
 
-    private final Map<K, CacheElement<V>> elements;
     private final Directory<K, V> directory;
 
     public FileSystemCache(int maxCacheElementCount, DisplacementStrategy<K, V> strategy, String baseFolderPath) {
         super(maxCacheElementCount, strategy);
-        this.elements = new HashMap<>();
         this.directory = new Directory<>(baseFolderPath);
     }
 
@@ -44,15 +40,5 @@ public class FileSystemCache<K, V extends Serializable> extends OneLevelCache<K,
     public void remove(K key) {
         elements.remove(key);
         directory.deleteFile(key);
-    }
-
-    @Override
-    public boolean contains(K key) {
-        return elements.containsKey(key);
-    }
-
-    @Override
-    public int size() {
-        return elements.size();
     }
 }

@@ -2,7 +2,6 @@ package ru.test.cache;
 
 import ru.test.strategy.DisplacementStrategy;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class MemoryCache<K, V> extends OneLevelCache<K, V> {
@@ -11,7 +10,6 @@ public class MemoryCache<K, V> extends OneLevelCache<K, V> {
 
     public MemoryCache(int maxCacheElementCount, DisplacementStrategy<K, V> strategy) {
         super(maxCacheElementCount, strategy);
-        this.elements = new HashMap<>();
     }
 
     @Override
@@ -37,15 +35,5 @@ public class MemoryCache<K, V> extends OneLevelCache<K, V> {
     @Override
     public void remove(K key) {
         elements.remove(key);
-    }
-
-    @Override
-    public boolean contains(K key) {
-        return elements.containsKey(key);
-    }
-
-    @Override
-    public int size() {
-        return elements.size();
     }
 }
