@@ -26,8 +26,8 @@ public class Directory<K, V extends Serializable> {
         file.delete();
     }
 
-    private File createBaseDirectory(String baseFolderPath) {
-        File baseDirectory = new File(baseFolderPath);
+    private File createBaseDirectory(String baseDirectoryPath) {
+        File baseDirectory = new File(baseDirectoryPath);
         if (!baseDirectory.exists()) {
             baseDirectory.mkdir();
         }

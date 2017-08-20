@@ -1,16 +1,16 @@
-package ru.test;
+package ru.test.data;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataRepository<K, V> {
+public class MemoryRepository<K, V> implements Repository<K, V> {
     private Map<K, V> data;
 
-    public DataRepository() {
+    public MemoryRepository() {
         this.data = new HashMap<>();
     }
 
-    public DataRepository(Map<K, V> data) {
+    public MemoryRepository(Map<K, V> data) {
         this.data = data;
     }
 

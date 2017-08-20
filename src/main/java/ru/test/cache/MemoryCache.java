@@ -24,7 +24,7 @@ public class MemoryCache<K, V> extends OneLevelCache<K, V> {
     }
 
     @Override
-    public void cache(K key, V value) {
+    public void put(K key, V value) {
         if (size() >= maxCacheElementCount) {
             K displacementElementKey = strategy.getDisplacementElementKey(elements);
             elements.remove(displacementElementKey);

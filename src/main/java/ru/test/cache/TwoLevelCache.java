@@ -13,7 +13,7 @@ public class TwoLevelCache<K, V extends Serializable> implements Cache<K, V> {
                          DisplacementStrategy<K, V> displacementStrategy,
                          String baseDirectoryPath) {
         this.level1 = new MemoryCache<>(maxCacheElementCountLevel1, displacementStrategy);
-        this.level2 = new FileSystemCache<>(maxCacheElementCountLevel2, displacementStrategy,
+        this.level2 = new FilesystemCache<>(maxCacheElementCountLevel2, displacementStrategy,
                 baseDirectoryPath);
     }
 
@@ -24,7 +24,7 @@ public class TwoLevelCache<K, V extends Serializable> implements Cache<K, V> {
         } else {
             if (level2.contains(key)) {
                 V value = level2.get(key);
-                level1.cache(key, value);
+                level1.put(key, value);
                 return value;
             } else {
                 return null;
@@ -33,9 +33,9 @@ public class TwoLevelCache<K, V extends Serializable> implements Cache<K, V> {
     }
 
     @Override
-    public void cache(K key, V value) {
-        level1.cache(key, value);
-        level2.cache(key, value);
+    public void put(K key, V value) {
+        level1.put(key, value);
+        level2.put(key, value);
     }
 
     @Override

@@ -5,13 +5,13 @@ import ru.test.strategy.DisplacementStrategy;
 
 import java.io.Serializable;
 
-public class FileSystemCache<K, V extends Serializable> extends OneLevelCache<K, V> {
+public class FilesystemCache<K, V extends Serializable> extends OneLevelCache<K, V> {
 
     private final Directory<K, V> directory;
 
-    public FileSystemCache(int maxCacheElementCount, DisplacementStrategy<K, V> strategy, String baseFolderPath) {
+    public FilesystemCache(int maxCacheElementCount, DisplacementStrategy<K, V> strategy, String baseDirectoryPath) {
         super(maxCacheElementCount, strategy);
-        this.directory = new Directory<>(baseFolderPath);
+        this.directory = new Directory<>(baseDirectoryPath);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class FileSystemCache<K, V extends Serializable> extends OneLevelCache<K,
     }
 
     @Override
-    public void cache(K key, V value) {
+    public void put(K key, V value) {
         if (size() >= maxCacheElementCount) {
             K displacementElementKey = strategy.getDisplacementElementKey(elements);
             elements.remove(displacementElementKey);
