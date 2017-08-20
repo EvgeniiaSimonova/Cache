@@ -41,6 +41,12 @@ public class FileSystemCache<K, V extends Serializable> extends OneLevelCache<K,
     }
 
     @Override
+    public void remove(K key) {
+        elements.remove(key);
+        directory.deleteFile(key);
+    }
+
+    @Override
     public boolean contains(K key) {
         return elements.containsKey(key);
     }

@@ -35,6 +35,11 @@ public class MemoryCache<K, V> extends OneLevelCache<K, V> {
     }
 
     @Override
+    public void remove(K key) {
+        elements.remove(key);
+    }
+
+    @Override
     public boolean contains(K key) {
         return elements.containsKey(key);
     }
