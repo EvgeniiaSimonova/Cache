@@ -6,7 +6,7 @@ public abstract class OneLevelCache<K, V> implements Cache<K, V> {
     final DisplacementStrategy<K, V> strategy;
     final int maxCacheElementCount;
 
-    public OneLevelCache(int maxCacheElementCount, DisplacementStrategy strategy) {
+    public OneLevelCache(int maxCacheElementCount, DisplacementStrategy<K, V> strategy) {
         this.maxCacheElementCount = maxCacheElementCount;
         this.strategy = strategy;
     }

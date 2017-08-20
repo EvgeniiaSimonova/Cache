@@ -9,13 +9,13 @@ public class MemoryCache<K, V> extends OneLevelCache<K, V> {
 
     private Map<K, CacheElement<V>> elements;
 
-    public MemoryCache(int maxCacheElementCount, DisplacementStrategy strategy) {
+    public MemoryCache(int maxCacheElementCount, DisplacementStrategy<K, V> strategy) {
         super(maxCacheElementCount, strategy);
         this.elements = new HashMap<>();
     }
 
     @Override
-    public V get(K key) { // may be replace by contains?
+    public V get(K key) {
         if (contains(key)) {
             CacheElement<V> cacheElement = elements.get(key);
             cacheElement.registerRequest();
@@ -27,7 +27,7 @@ public class MemoryCache<K, V> extends OneLevelCache<K, V> {
 
     @Override
     public void cache(K key, V value) {
-        if (size() >= maxCacheElementCount) { // may be replace by == ?
+        if (size() >= maxCacheElementCount) {
             K displacementElementKey = strategy.getDisplacementElementKey(elements);
             elements.remove(displacementElementKey);
         }
