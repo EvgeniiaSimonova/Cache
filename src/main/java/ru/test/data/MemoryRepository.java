@@ -2,8 +2,10 @@ package ru.test.data;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class MemoryRepository<K, V> implements Repository<K, V> {
+    private final Logger logger = Logger.getLogger(MemoryRepository.class.getName());
     private Map<K, V> data;
 
     public MemoryRepository() {
@@ -19,14 +21,8 @@ public class MemoryRepository<K, V> implements Repository<K, V> {
     }
 
     public V get(K key) {
-        return data.get(key);
-    }
-
-    public Map<K, V> getData() {
-        return data;
-    }
-
-    public void setData(Map<K, V> data) {
-        this.data = data;
+        V value = data.get(key);
+        logger.info("Value: " + value + " was found in Repository");
+        return value;
     }
 }

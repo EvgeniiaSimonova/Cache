@@ -1,35 +1,34 @@
 package ru.test.cache;
 
-import ru.test.strategy.DisplacementStrategy;
+import ru.test.exception.InputParameterException;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 public class TwoLevelCache<K, V extends Serializable> implements Cache<K, V> {
+    private final Logger logger = Logger.getLogger(TwoLevelCache.class.getName());
     private Cache<K, V> level1;
     private Cache<K, V> level2;
 
-    public TwoLevelCache(int maxCacheElementCountLevel1,
-                         int maxCacheElementCountLevel2,
-                         DisplacementStrategy<K, V> displacementStrategy,
-                         String baseDirectoryPath) {
-        this.level1 = new MemoryCache<>(maxCacheElementCountLevel1, displacementStrategy);
-        this.level2 = new FilesystemCache<>(maxCacheElementCountLevel2, displacementStrategy,
-                baseDirectoryPath);
+    public TwoLevelCache(Cache<K, V> level1, Cache<K, V> level2) throws InputParameterException {
+        this.level1 = level1;
+        this.level2 = level2;
     }
 
     @Override
     public V get(K key) {
-        if (level1.contains(key)) {
-            return level1.get(key);
+        V value = level1.get(key);
+        if (value != null) {
+            logger.info("Value: " + value + " was found in L1");
         } else {
-            if (level2.contains(key)) {
-                V value = level2.get(key);
+            value = level2.get(key);
+            if (value != null) {
+                logger.info("Value: " + value + " was found in L2");
                 level1.put(key, value);
-                return value;
-            } else {
-                return null;
             }
         }
+
+        return value;
     }
 
     @Override

@@ -26,19 +26,6 @@ public class Storage<K, V> {
         cache.clear();
     }
 
-    // may be it is better
-    /*public V get2(K key) {
-        V value;
-        if (cache.contains(key)) {
-            value = cache.get(key);
-        } else {
-            value = repository.get(key);
-            cache.cache(key, value);
-        }
-
-        return value;
-    }*/
-
     private V getFromCache(K key) {
         return cache.get(key);
     }
