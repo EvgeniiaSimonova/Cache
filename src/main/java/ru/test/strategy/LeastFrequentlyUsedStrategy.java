@@ -5,7 +5,6 @@ import ru.test.cache.CacheElement;
 import java.util.Map;
 import java.util.Optional;
 
-//Вытеснение наименее часто используемых
 public class LeastFrequentlyUsedStrategy<K, V> implements DisplacementStrategy<K, V> {
     @Override
     public K getDisplacementElementKey(Map<K, CacheElement<V>> elements) {
